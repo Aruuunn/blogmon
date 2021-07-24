@@ -1,3 +1,2 @@
-import {default as Hashnode} from "./hashnodeBlogs"
-import {default as Medium} from "./mediumBlogs"
-export {Medium, Hashnode}
+export { default as getLatestHashnodePosts } from "./hashnodeBlogs";
+export { default as getMediumArticles } from "./mediumBlogs";

@@ -13,7 +13,11 @@
   ],
   "scripts": {
     "prepublish": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "prettier --write \"src/**/*.ts\" ",
+    "prepare": "husky install",
+    "build": "tsc -b .",
+    "dev": "tsc -b -w .",
+    "lint:staged": "pretty-quick --staged && lint-staged"
   },
   "keywords": [
     "blogs",
@@ -27,9 +31,24 @@
   },
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2",
+    "pretty-quick": "^3.1.1"
   },
   "devDependencies": {
-    "@types/node": "^16.3.3"
+    "@types/node": "^16.3.3",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.1",
+    "typescript": "^4.3.5"
+  },
+  "lint-staged": {
+    "*.{ts,js}": "eslint --cache --fix"
   }
 }

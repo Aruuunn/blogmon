@@ -1,5 +1,5 @@
-export type BlogPostConfig={
-    url: string;
-    title: string;
-    thumbnail: string;
-}
+export type BlogPostConfig = {
+  url: string;
+  title: string;
+  thumbnail: string;
+};
