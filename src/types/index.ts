@@ -1,2 +1,2 @@
-export * from "./BlogPostConfig";
-export * from "./UserNameConfig";
+export * from "./BlogPostInterface";
+export * from "./Config";

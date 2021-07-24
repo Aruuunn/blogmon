@@ -1,5 +1,5 @@
 import { getLatestHashnodePosts, getMediumArticles } from "./blogs";
-import { UsernameConfig } from "./types/UserNameConfig";
+import { UsernameConfig } from "./types/Config";
 
 export const getBlogs = async (
   type: "medium" | "hashnode" | "all",
