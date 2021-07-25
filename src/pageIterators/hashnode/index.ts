@@ -1,7 +1,11 @@
 import { BlogPost, Config, BlogsPageIterator } from "../../interfaces";
+import { BlogPageIteratorBase } from "../BlogPageIteratorBase";
 import { getHashNodeArticles } from "./getHashNodeArticles";
 
-export class HashnodeBlogsPaginator implements BlogsPageIterator {
+export class HashnodeBlogsPaginator
+  extends BlogPageIteratorBase
+  implements BlogsPageIterator
+{
   private userName: string;
 
   private page = 0;
@@ -13,22 +17,13 @@ export class HashnodeBlogsPaginator implements BlogsPageIterator {
   private buffer: BlogPost[] = [];
 
   constructor(config: Config) {
+    super();
+
     this.userName = config.userName;
 
     if (typeof config.perPage === "number" && config.perPage > 0) {
       this.perPage = config.perPage;
     }
-  }
-
-  async hasNext(): Promise<boolean> {
-    return (
-      !this.done &&
-      (await getHashNodeArticles(this.userName, this.page)).length > 0
-    );
-  }
-
-  [Symbol.asyncIterator](): AsyncIterableIterator<BlogPost[]> {
-    return this;
   }
 
   async next(): Promise<IteratorResult<BlogPost[]>> {
@@ -43,13 +38,6 @@ export class HashnodeBlogsPaginator implements BlogsPageIterator {
     }
 
     return { value: this.buffer.splice(0, this.perPage), done: this.done };
-  }
-
-  async nextPage(): Promise<BlogPost[] | null> {
-    const { value, done } = await this.next();
-    if (done) return null;
-
-    return value;
   }
 }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { HashnodeBlogsPaginator } from ".";
 import { BlogsPageIterator } from "../../interfaces";
+import { assertBlogPostShape } from "../../utils/assertBlogPost.testutil";
 
 jest.setTimeout(25000);
 
@@ -25,20 +26,11 @@ describe("HashNode Blog Iterator", () => {
           for (const blog of blogPage) {
             expect(s.has(blog.url)).toEqual(false);
 
-            expect(typeof blog.url).toEqual("string");
+            assertBlogPostShape(blog);
 
             await axios(blog.url, { method: "HEAD" });
 
             s.add(blog.url);
-
-            expect(blog.tags).toBeInstanceOf(Array);
-            expect(typeof blog.title).toEqual("string");
-            expect(typeof blog.description).toEqual("string");
-            expect(typeof blog.coverImageUrl).toEqual("string");
-
-            if (blog.dateAdded) expect(blog.dateAdded).toBeInstanceOf(Date);
-
-            if (blog.dateEdited) expect(blog.dateEdited).toBeInstanceOf(Date);
           }
 
           iter++;

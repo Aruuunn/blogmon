@@ -19,5 +19,5 @@
     "import/extensions": "off",
     "import/prefer-default-export": "off"
   },
-  "ignorePatterns": ["*.test.ts"]
+  "ignorePatterns": ["*.test.ts", "*.testutil.ts"]
 }
