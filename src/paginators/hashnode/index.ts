@@ -1,7 +1,8 @@
 import axios from "axios";
-import { BlogPostInterface } from "../types";
-import { validDateOrUndefined } from "../utils";
-import { Config } from "../types/Config";
+import { BlogsPaginatorInterface } from "../../types/BlogsPaginatorInterface";
+import { BlogPostInterface } from "../../types";
+import { validDateOrUndefined } from "../../utils";
+import { Config } from "../../types/Config";
 
 const HASHNODE_API_URL = "https://api.hashnode.com/";
 
@@ -66,18 +67,15 @@ const getHashNodeArticles = async (
     })
     .then((response) => response.data?.data?.user)
     .then(pipeThrowErrorIfUserNameIsEmpty)
-    .then(({ username, publicationDomain, publication: { posts } }) => ({
+    .then(({ publicationDomain, publication: { posts } }) => ({
       posts,
       publicationDomain,
-      username,
     }))
-    .then(({ posts, publicationDomain, username }) =>
+    .then(({ posts, publicationDomain }) =>
       posts.map(toBlogData(username, publicationDomain))
     );
 
-export class HashnodeBlogsPaginator
-  implements AsyncIterableIterator<BlogPostInterface[]>
-{
+export class HashnodeBlogsPaginator implements BlogsPaginatorInterface {
   private userName: string;
 
   private page = 0;
@@ -119,6 +117,13 @@ export class HashnodeBlogsPaginator
     }
 
     return { value: this.buffer.splice(0, this.perPage), done: this.done };
+  }
+
+  async nextPage(): Promise<BlogPostInterface[] | null> {
+    const { value, done } = await this.next();
+    if (done) return null;
+
+    return value;
   }
 }
 
