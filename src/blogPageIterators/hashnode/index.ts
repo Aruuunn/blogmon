@@ -2,7 +2,7 @@ import { BlogPost, Config, BlogsPageIterator } from "../../interfaces";
 import { BlogPageIteratorBase } from "../BlogPageIteratorBase";
 import { getHashNodeArticles } from "./getHashNodeArticles";
 
-export class HashnodeBlogsPaginator
+export class HashnodeBlogsPageIterator
   extends BlogPageIteratorBase
   implements BlogsPageIterator
 {
@@ -43,4 +43,4 @@ export class HashnodeBlogsPaginator
   }
 }
 
-export default HashnodeBlogsPaginator;
+export default HashnodeBlogsPageIterator;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HashnodeBlogsPaginator } from ".";
+import { HashnodeBlogsPageIterator } from ".";
 import { BlogsPageIterator } from "../../interfaces";
 import { assertBlogPostShape } from "../../utils/assertBlogPost.testutil";
 
@@ -11,7 +11,7 @@ describe("HashNode Blog Iterator", () => {
       "should be able to iterate through blog pages of given size for userName: " +
         userName,
       async () => {
-        const blogIterator: BlogsPageIterator = new HashnodeBlogsPaginator({
+        const blogIterator: BlogsPageIterator = new HashnodeBlogsPageIterator({
           userName,
           perPage,
         });
@@ -47,7 +47,7 @@ describe("HashNode Blog Iterator", () => {
   assertForUserName("victoria", 3, 2);
 
   it("should throw error if userName is wrong", async () => {
-    const blogIterator = new HashnodeBlogsPaginator({
+    const blogIterator = new HashnodeBlogsPageIterator({
       userName: "wrongsdhfishdjk",
       perPage: 2,
     });
