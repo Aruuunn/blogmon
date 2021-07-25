@@ -5,10 +5,18 @@ import { Config } from "../types/Config";
 
 const HASHNODE_API_URL = "https://api.hashnode.com/";
 
+const getPublicationDomianOrDefault = (
+  userName: string,
+  publicationDomain: string
+): string => publicationDomain.trim() || `${userName}.hashnode.dev`;
+
 const toBlogData =
-  (publicationDomain: string) =>
+  (userName: string, publicationDomain: string) =>
   (post: any): BlogPostInterface => ({
-    url: `https://${publicationDomain}/${post.slug}`,
+    url: `https://${getPublicationDomianOrDefault(
+      userName,
+      publicationDomain
+    )}/${post.slug}`,
     title: post.title,
     coverImageUrl: post.coverImage ?? "",
     description: post.brief ?? "",
@@ -16,6 +24,18 @@ const toBlogData =
     dateAdded: validDateOrUndefined(post.dateAdded),
     dateEdited: validDateOrUndefined(post.dateUpdated),
   });
+
+const pipeThrowErrorIfUserNameIsEmpty = <
+  T extends { username?: string | null }
+>(
+  data: T
+): T => {
+  if (typeof data?.username !== "string" || data.username.trim().length === 0) {
+    throw new Error("username is wrong");
+  }
+
+  return data;
+};
 
 // Fetches articles published at HashNode. Can Only get a maximum of 6 articles at a time.
 const getHashNodeArticles = async (
@@ -26,14 +46,10 @@ const getHashNodeArticles = async (
     .post(HASHNODE_API_URL, {
       query: `query{
             user(username: "${username}") {
+                username
                 publicationDomain
                 publication {
                   posts(page:${page}) {
-                    author{
-                      username
-                      name
-                      photo
-                    }
                     title
                     coverImage
                     brief
@@ -49,15 +65,17 @@ const getHashNodeArticles = async (
         }`,
     })
     .then((response) => response.data?.data?.user)
-    .then(({ publicationDomain, publication: { posts } }) => ({
+    .then(pipeThrowErrorIfUserNameIsEmpty)
+    .then(({ username, publicationDomain, publication: { posts } }) => ({
       posts,
       publicationDomain,
+      username,
     }))
-    .then(({ posts, publicationDomain }) =>
-      posts.map(toBlogData(publicationDomain))
+    .then(({ posts, publicationDomain, username }) =>
+      posts.map(toBlogData(username, publicationDomain))
     );
 
-export class HashnodeBlogIterator
+export class HashnodeBlogsPaginator
   implements AsyncIterableIterator<BlogPostInterface[]>
 {
   private userName: string;
@@ -104,4 +122,4 @@ export class HashnodeBlogIterator
   }
 }
 
-export default HashnodeBlogIterator;
+export default HashnodeBlogsPaginator;
