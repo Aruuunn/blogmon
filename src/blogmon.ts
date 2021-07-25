@@ -14,7 +14,7 @@ async function getAllBlogPosts(
   // eslint-disable-next-line no-unused-vars
   fn: (config: Config) => BlogsPageIterator
 ): Promise<BlogPost[]> {
-  const iterator = fn({ userName, perPage: 1000 });
+  const iterator = fn({ userName, perPage: 10000 });
 
   let blogPosts: BlogPost[] = [];
 
@@ -29,6 +29,7 @@ const orderByDate = (a: BlogPost, b: BlogPost): number =>
   (b.dateAdded?.getTime() ?? 0) - (a.dateAdded?.getTime() ?? 0);
 
 // Fetches all blog posts using the given usernames and sorts them by date. Gotta get'em all!
+// Might be slow.
 function getemAll(userNames: UserNames): Promise<BlogPost[]> {
   const handlers: Handlers = {
     devtoUserName: getDevtoPageIterator,
@@ -55,6 +56,12 @@ function getemAll(userNames: UserNames): Promise<BlogPost[]> {
         blogPosts = blogPosts.concat(result.value);
       }
     }
+
+    // No need to sort, as it will be already in order.
+    if (promises.length <= 1) {
+      return blogPosts;
+    }
+
     return blogPosts.sort(orderByDate);
   });
 }
