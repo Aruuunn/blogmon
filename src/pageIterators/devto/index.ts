@@ -7,7 +7,7 @@ export class DevtoBlogsIterator
   extends BlogPageIteratorBase
   implements BlogsPageIterator
 {
-  private page = 0;
+  private page = 1;
 
   private userName: string;
 
@@ -29,6 +29,8 @@ export class DevtoBlogsIterator
 
   async next(): Promise<IteratorResult<BlogPost[]>> {
     const value = await fetchBlogs(this.userName, this.perPage, this.page);
+
+    this.page += 1;
 
     if (value.length === 0) {
       this.done = true;

@@ -21,7 +21,7 @@ describe("HashNode Blog Iterator", () => {
         const s = new Set();
 
         for await (const blogPage of blogIterator) {
-          expect(blogPage.length).toEqual(perPage);
+          expect(blogPage.length <= perPage).toEqual(true);
 
           for (const blog of blogPage) {
             expect(s.has(blog.url)).toEqual(false);

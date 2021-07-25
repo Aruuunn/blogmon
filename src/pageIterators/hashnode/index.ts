@@ -37,7 +37,9 @@ export class HashnodeBlogsPaginator
       this.buffer = this.buffer.concat(posts);
     }
 
-    return { value: this.buffer.splice(0, this.perPage), done: this.done };
+    const value = this.buffer.splice(0, this.perPage);
+
+    return { value, done: value.length === 0 && this.done };
   }
 }
 
