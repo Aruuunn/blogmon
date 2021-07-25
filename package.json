@@ -1,12 +1,12 @@
 {
-  "name": "blogtraversy",
+  "name": "blogmon",
   "version": "3.2.0",
-  "description": "A package that helps you to fetch all the blogs from Medium and Hashnode",
-  "main": "lib/index.js",
-  "types": "./lib/index.d.ts",
+  "description": "A npm package that fetchs blog posts from publication websites like hashnode, dev.to. Gotta get'em all!",
+  "main": "lib/blogmon.js",
+  "types": "lib/blogmon.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/imabp/blogtraversy.git"
+    "url": "https://github.com/ArunMurugan78/blogmon.git"
   },
   "files": [
     "lib"
@@ -30,7 +30,7 @@
     "email": "abir.pal899@gmail.com",
     "url": "https://github.com/imabp"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
     "eslint-config-prettier": "^8.3.0",

@@ -1,4 +1,4 @@
-export interface BlogPostInterface {
+export interface BlogPost {
   url: string;
   coverImageUrl: string;
   title: string;

@@ -1,6 +1,6 @@
-import { BlogsPaginatorInterface } from "./../../types/BlogsPaginatorInterface";
 import axios from "axios";
 import { HashnodeBlogsPaginator } from ".";
+import { BlogsPageIterator } from "../../interfaces";
 
 jest.setTimeout(25000);
 
@@ -10,11 +10,10 @@ describe("HashNode Blog Iterator", () => {
       "should be able to iterate through blog pages of given size for userName: " +
         userName,
       async () => {
-        const blogIterator: BlogsPaginatorInterface =
-          new HashnodeBlogsPaginator({
-            userName,
-            perPage,
-          });
+        const blogIterator: BlogsPageIterator = new HashnodeBlogsPaginator({
+          userName,
+          perPage,
+        });
 
         let iter = 0;
 
