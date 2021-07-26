@@ -64,7 +64,7 @@ To get all Blog Posts from all the provided websites use `getAllPosts`.
 ```javascript
 import { getDevtoPostIterator } from "blogmon";
 
-// All fields are Optional. but cannot be empty.
+// blogPosts will be fetched for the provided usernames
 const usernames = {
   devtoUserName: "arunmurugan78",
   hashnodeUserName: "arunmurugan",
