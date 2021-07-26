@@ -1,8 +1,10 @@
 # Blogmon
 
-A npm package to fetch (or paginate) blog posts from many blog post publishing websites. Currently supports _only_ dev.to and hashnode.com
+A npm package to fetch (or **paginate**) blog posts from many blog post publishing websites. Currently supports _only_ dev.to and hashnode.com
 
 > Gotta get'em all!
+
+Blogmon is  a fork of [blogtraversy](https://github.com/ArunMurugan78/blogmon).
 
 ## Installation
 
@@ -78,3 +80,4 @@ getAllPosts(usernames).then((blogPosts) => {
   // do whatever you want to do with blogPosts
 });
 ```
+
