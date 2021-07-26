@@ -4,7 +4,6 @@ A npm package to fetch (or **paginate**) blog posts from many blog post publishi
 
 > Gotta get'em all!
 
-Blogmon is  a fork of [blogtraversy](https://github.com/ArunMurugan78/blogmon).
 
 ## Installation
 
