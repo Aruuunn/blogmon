@@ -30,7 +30,7 @@ const orderByDate = (a: BlogPost, b: BlogPost): number =>
 
 // Fetches all blog posts using the given usernames and sorts them by date. Gotta get'em all!
 // Might be slow.
-function getemAll(userNames: UserNames): Promise<BlogPost[]> {
+function getAllPosts(userNames: UserNames): Promise<BlogPost[]> {
   const handlers: Handlers = {
     devtoUserName: getDevtoPostIterator,
     hashnodeUserName: getHashnodePostIterator,
@@ -68,8 +68,10 @@ function getemAll(userNames: UserNames): Promise<BlogPost[]> {
 
 export type { UserNames, Config, BlogPost, BlogPostIterator };
 
-export {
+export { getDevtoPostIterator, getHashnodePostIterator, getAllPosts };
+
+export default {
   getDevtoPostIterator,
   getHashnodePostIterator,
-  getemAll as getAllPosts,
+  getAllPosts,
 };
