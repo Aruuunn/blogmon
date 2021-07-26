@@ -1,11 +1,11 @@
 import { fetchBlogs } from "./fetchBlogs";
-import { BlogPost, Config, BlogsPageIterator } from "../../interfaces";
+import { BlogPost, Config, BlogPostIterator } from "../../interfaces";
 
 import { BlogPageIteratorBase } from "../BlogPageIteratorBase";
 
-export class DevtoBlogsIterator
+export class DevtoPostIterator
   extends BlogPageIteratorBase
-  implements BlogsPageIterator
+  implements BlogPostIterator
 {
   private page = 1;
 

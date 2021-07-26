@@ -1,6 +1,6 @@
-import { BlogPost, BlogsPageIterator } from "../interfaces";
+import { BlogPost, BlogPostIterator } from "../interfaces";
 
-export abstract class BlogPageIteratorBase implements BlogsPageIterator {
+export abstract class BlogPageIteratorBase implements BlogPostIterator {
   abstract next(): Promise<IteratorResult<BlogPost[]>>;
 
   async nextPage(): Promise<BlogPost[] | null> {

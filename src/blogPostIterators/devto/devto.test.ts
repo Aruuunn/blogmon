@@ -1,4 +1,4 @@
-import { DevtoBlogsIterator } from ".";
+import { DevtoPostIterator } from ".";
 import { assertBlogPostShape } from "../../utils/assertBlogPost.testutil";
 
 /**
@@ -12,7 +12,7 @@ describe("test devto blog page iterator", () => {
     maxIter: number
   ) {
     it(`should fetch blogs in pages of size perPage. username: ${userName}`, async () => {
-      const blogPageIterator = new DevtoBlogsIterator({ userName, perPage });
+      const blogPageIterator = new DevtoPostIterator({ userName, perPage });
 
       const s = new Set();
       let iter = 0;

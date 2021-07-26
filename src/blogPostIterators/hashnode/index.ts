@@ -1,10 +1,10 @@
-import { BlogPost, Config, BlogsPageIterator } from "../../interfaces";
+import { BlogPost, Config, BlogPostIterator } from "../../interfaces";
 import { BlogPageIteratorBase } from "../BlogPageIteratorBase";
 import { getHashNodeArticles } from "./getHashNodeArticles";
 
-export class HashnodeBlogsPageIterator
+export class HashnodePostIterator
   extends BlogPageIteratorBase
-  implements BlogsPageIterator
+  implements BlogPostIterator
 {
   private userName: string;
 
@@ -43,4 +43,4 @@ export class HashnodeBlogsPageIterator
   }
 }
 
-export default HashnodeBlogsPageIterator;
+export default HashnodePostIterator;

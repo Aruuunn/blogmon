@@ -1,18 +1,18 @@
-import { BlogsPageIterator, Config, BlogPost } from "./interfaces";
+import { BlogPostIterator, Config, BlogPost } from "./interfaces";
 import {
-  getDevtoPageIterator,
-  getHashnodePageIterator,
-} from "./blogPageIterators";
+  getDevtoPostIterator,
+  getHashnodePostIterator,
+} from "./blogPostIterators";
 
 type UserNames = { hashnodeUserName?: string; devtoUserName?: string };
 // eslint-disable-next-line no-unused-vars
-type Handlers = Record<keyof UserNames, (config: Config) => BlogsPageIterator>;
+type Handlers = Record<keyof UserNames, (config: Config) => BlogPostIterator>;
 
 // Fetches all blog posts using the given user name and iterator constructor
 async function getAllBlogPosts(
   userName: string,
   // eslint-disable-next-line no-unused-vars
-  fn: (config: Config) => BlogsPageIterator
+  fn: (config: Config) => BlogPostIterator
 ): Promise<BlogPost[]> {
   const iterator = fn({ userName, perPage: 10000 });
 
@@ -32,8 +32,8 @@ const orderByDate = (a: BlogPost, b: BlogPost): number =>
 // Might be slow.
 function getemAll(userNames: UserNames): Promise<BlogPost[]> {
   const handlers: Handlers = {
-    devtoUserName: getDevtoPageIterator,
-    hashnodeUserName: getHashnodePageIterator,
+    devtoUserName: getDevtoPostIterator,
+    hashnodeUserName: getHashnodePostIterator,
   };
 
   const promises: Promise<BlogPost[]>[] = [];
@@ -66,8 +66,10 @@ function getemAll(userNames: UserNames): Promise<BlogPost[]> {
   });
 }
 
+export type { UserNames, Config, BlogPost, BlogPostIterator };
+
 export {
-  getDevtoPageIterator,
-  getHashnodePageIterator,
-  getemAll as getAllBlogPosts,
+  getDevtoPostIterator,
+  getHashnodePostIterator,
+  getemAll as getAllPosts,
 };
