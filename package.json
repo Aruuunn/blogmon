@@ -1,7 +1,7 @@
 {
   "name": "blogmon",
-  "version": "3.2.0",
-  "description": "A npm package that fetchs blog posts from publication websites like hashnode, dev.to. Gotta get'em all!",
+  "version": "1.0.0",
+  "description": "A npm package to fetch blog posts from many blog post publishing websites.",
   "main": "lib/blogmon.js",
   "types": "lib/blogmon.d.ts",
   "repository": {
@@ -25,11 +25,6 @@
     "hashnode",
     "medium"
   ],
-  "author": {
-    "name": "Abir Pal",
-    "email": "abir.pal899@gmail.com",
-    "url": "https://github.com/imabp"
-  },
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
