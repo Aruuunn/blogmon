@@ -1,6 +1,6 @@
 {
   "name": "blogmon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A npm package to fetch blog posts from many blog post publishing websites.",
   "main": "lib/blogmon.js",
   "types": "lib/blogmon.d.ts",
